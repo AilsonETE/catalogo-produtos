@@ -55,6 +55,10 @@
   <!-- jsvectormap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jsvectormap@1.5.3/dist/css/jsvectormap.min.css"
     integrity="sha256-+uGLJmmTKOqBr+2E6KDYs/NRsHxSkONXFHUL0fy2O/4=" crossorigin="anonymous" />
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 <!--end::Head-->
 <!--begin::Body-->
@@ -204,13 +208,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="./widgets/small-box.html" class="nav-link">
+                  <a href="/listar_categorias" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Listar Categoria</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="./widgets/info-box.html" class="nav-link">
+                  <a href="/listar_produtos" class="nav-link">
                     <i class="nav-icon bi bi-circle"></i>
                     <p>Listar Produtos</p>
                   </a>
@@ -230,13 +234,13 @@
     <!--begin::App Main-->
 
 
+    <main>
 
+      {% block content %}
 
-    {% block content %}
+      {% endblock %}
 
-    {% endblock %}
-
-
+    </main>
 
 
 
