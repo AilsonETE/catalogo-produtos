@@ -2,8 +2,13 @@
 
 {% block content %}
 
-
 <h1> Lista de categoria</h1>
+
+<div class="col text-end">
+    <a href="#" class="btn btn-primary  ">
+        Nova categoria
+    </a>
+</div>
 
 <table class="table">
     <thead>
@@ -15,24 +20,15 @@
         </tr>
     </thead>
     <tbody>
+
+        {% for i in categorias %}
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
+            <th scope="row">{{ i[0] }}</th>
+            <td>{{ i[1] }}</td>
+            <td>{{ i[5]}}</td>
 
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>John</td>
-            <td>Doe</td>
-
-        </tr>
+        {% endfor %}
     </tbody>
 </table>
 
