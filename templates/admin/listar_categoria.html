@@ -16,6 +16,9 @@
             <th scope="col">#</th>
             <th scope="col">Nome</th>
             <th scope="col">Foto</th>
+            <th scope="col">Ações</th>
+
+
 
         </tr>
     </thead>
@@ -23,9 +26,20 @@
 
         {% for i in categorias %}
         <tr>
-            <th scope="row">{{ i[0] }}</th>
-            <td>{{ i[1] }}</td>
-            <td>{{ i[5]}}</td>
+            <th scope="row">{{ i.id }}</th>
+            <td>{{ i.nome }}</td>
+
+            <td><img src="data:image/jpeg;base64,
+            {{ i['imagem'] }}" width="50"></td>
+
+            <td class="text-end">
+                <div class="action-btns justify-content-end">
+                    <a href="{{ url_for('editarCategoria', id=i['id']) }}" class="btn btn-sm btn-warning">
+                        <i class="bi bi-pencil"></i>
+                        <span class="d-none d-lg-inline ms-1">Editar</span>
+                    </a>
+                </div>
+            </td>
 
         </tr>
         {% endfor %}
