@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1> Lista de categoria</h1>
+<h1> Lista de Produto</h1>
 
 <div class="col text-end">
     <a href="{{url_for('cadastrarCategoria')}}" class="btn btn-primary  ">
@@ -16,6 +16,7 @@
             <th scope="col">#</th>
             <th scope="col">Nome</th>
             <th scope="col">Foto</th>
+            <th scope="col">Preço</th>
             <th scope="col">Ações</th>
 
 
@@ -24,10 +25,11 @@
     </thead>
     <tbody>
 
-        {% for i in categorias %}
+        {% for i in produtos %}
         <tr>
             <th scope="row">{{ i.id }}</th>
             <td>{{ i.nome }}</td>
+            <td>{{ i.preco }}</td>
 
             <td><img src="data:image/jpeg;base64,
             {{ i['imagem'] }}" width="50"></td>

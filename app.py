@@ -90,4 +90,12 @@ def excluirCategoria(id):
   
     return render_template('admin/excluir_categoria.html', categoria = categoria )
 
+
+@app.route("/listar_produtos")
+def listarProduto():
+    conn = conexao()
+    produto = conn.execute('select * from produto')
+    return render_template('admin/listar_produto.html',
+                           produtos = produto)
+
 app.run(debug=True, port=5005 )
