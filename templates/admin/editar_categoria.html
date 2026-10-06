@@ -1,51 +1,52 @@
 {% extends 'admin/base.html' %}
+{% block title %}Editar Categoria{% endblock %}
+{% block page_title %}Editar Categoria{% endblock %}
+{% block breadcrumb %}Editar categoria{% endblock %}
 
 {% block content %}
+<div class="row justify-content-center">
+  <div class="col-xl-8 col-lg-10">
+    <div class="card card-warning card-outline">
+      <div class="card-header"><h3 class="card-title">Categoria #{{ categoria.id }}</h3></div>
+      <form method="POST" enctype="multipart/form-data">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="nome_categoria" class="form-label">Nome da Categoria</label>
+            <input type="text" class="form-control" id="nome_categoria" name="nome_categoria"
+                   value="{{ categoria.nome }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="descricao" class="form-label">Descrição</label>
+            <textarea class="form-control" id="descricao" name="descricao" rows="3">{{ categoria.descricao or '' }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="ativo" class="form-label">Status</label>
+            <select class="form-select" id="ativo" name="ativo">
+              <option value="True" {% if categoria.ativo|string == 'True' %}selected{% endif %}>Ativo</option>
+              <option value="False" {% if categoria.ativo|string == 'False' %}selected{% endif %}>Inativo</option>
+            </select>
+          </div>
 
-<h3 style="background-color: rgb(198, 197, 197);">
-    Editar Categoria</h3>
+          {% if categoria.img %}
+          <div class="mb-3">
+            <label class="form-label d-block">Imagem atual</label>
+            <img src="{{ url_for('static', filename=categoria.img) }}" alt="Imagem de {{ categoria.nome }}" class="image-preview">
+            <div class="form-text">Endereço salvo: {{ categoria.img }}</div>
+          </div>
+          {% endif %}
 
-<div class="container">
-
-    <form method="POST" enctype="multipart/form-data">
-        <div class="form-group">
-            <label for="nome_categoria">Nome da Categoria:</label>
-            <input type="text" class="form-control" id="nome_categoria" value="{{categoria.nome}}" name="nome_categoria"
-                </div>
-
-            <div class="form-group">
-                <label for="descricao">Descrição:</label>
-                <input type="text" class="form-control" value="{{categoria.descricao}}" id="descricao" name="descricao"
-                    required>
-            </div>
-
-            <div class=" form-group">
-                <label for="ativo" id="ativo" class="form-label">
-                    Status</label>
-                <select class="form-select" name="ativo">
-                    <option value="True" {% if categoria.ativo=='True' %}selected{% endif %}>Ativo</option>
-
-                    <option value="False" {% if categoria.ativo=='False' %}selected{% endif %}>Inativo</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="imagem_atual">Imagem Atual:</label>
-                <img src="data:image/jpeg;base64,
-            {{ categoria['imagem'] }}" alt="Imagem Atual" style="width: 200px;">
-            </div>
-
-            <div class="form-group">
-                <label for="imagem">Nova imagem:</label>
-                <input type="file" class="form-control" id="imagem" name="imagem">
-
-            </div>
-
-            <br>
-
-            <button type="submit" class="btn btn-primary mb-2">
-                Cadastrar</button>
-    </form>
+          <div class="mb-3">
+            <label for="imagem" class="form-label">Nova imagem</label>
+            <input type="file" class="form-control" id="imagem" name="imagem" accept="image/png,image/jpeg,image/gif,image/webp">
+            <div class="form-text">Deixe vazio para manter a imagem atual.</div>
+          </div>
+        </div>
+        <div class="card-footer d-flex justify-content-between">
+          <a href="{{ url_for('listarCategoria') }}" class="btn btn-secondary">Cancelar</a>
+          <button type="submit" class="btn btn-warning"><i class="bi bi-save me-1"></i>Salvar alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
-
 {% endblock %}

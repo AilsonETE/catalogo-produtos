@@ -1,60 +1,34 @@
 {% extends 'admin/base.html' %}
+{% block title %}Produtos{% endblock %}
+{% block page_title %}Produtos{% endblock %}
+{% block breadcrumb %}Produtos{% endblock %}
 
 {% block content %}
-
-<h1> Lista de Produto</h1>
-
-<div class="col text-end">
-    <a href="{{url_for('cadastrarCategoria')}}" class="btn btn-primary  ">
-        Nova categoria
-    </a>
-</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Foto</th>
-            <th scope="col">Preço</th>
-            <th scope="col">Ações</th>
-
-
-
-        </tr>
-    </thead>
-    <tbody>
-
+<div class="card">
+  <div class="card-header"><h3 class="card-title">Lista de produtos</h3></div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead><tr><th>#</th><th>Imagem</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Status</th></tr></thead>
+        <tbody>
         {% for i in produtos %}
-        <tr>
-            <th scope="row">{{ i.id }}</th>
-            <td>{{ i.nome }}</td>
-            <td>{{ i.preco }}</td>
-
-            <td><img src="data:image/jpeg;base64,
-            {{ i['imagem'] }}" width="50"></td>
-
-            <td class="text-end">
-                <div class="action-btns justify-content-end">
-                    <a href="{{ url_for('editarCategoria', id=i['id']) }}" class="btn btn-sm btn-warning">
-                        <i class="bi bi-pencil"></i>
-                        <span class="d-none d-lg-inline ms-1">Editar</span>
-                    </a>
-
-                    <a href="{{ url_for('excluirCategoria', id=i['id']) }}" class="btn btn-sm btn-danger">
-                        <i class="bi bi-pencil"></i>
-                        <span class="d-none d-lg-inline ms-1">Excluir</span>
-                    </a>
-                </div>
-
-
+          <tr>
+            <td>{{ i.id }}</td>
+            <td>
+              {% if i.img %}<img src="{{ url_for('static', filename=i.img) }}" class="table-thumb" alt="{{ i.nome }}">
+              {% else %}<span class="placeholder-image"><i class="bi bi-image text-secondary"></i></span>{% endif %}
             </td>
-
-
-
-        </tr>
+            <td class="fw-semibold">{{ i.nome }}</td>
+            <td>{{ i.categoria_nome or '-' }}</td>
+            <td>{% if i.preco is not none %}R$ {{ '%.2f'|format(i.preco)|replace('.', ',') }}{% else %}-{% endif %}</td>
+            <td>{% if i.ativo|string == 'True' %}<span class="badge text-bg-success">Ativo</span>{% else %}<span class="badge text-bg-secondary">Inativo</span>{% endif %}</td>
+          </tr>
+        {% else %}
+          <tr><td colspan="6" class="text-center text-secondary py-4">Nenhum produto cadastrado.</td></tr>
         {% endfor %}
-    </tbody>
-</table>
-
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}

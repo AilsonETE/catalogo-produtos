@@ -1,15 +1,23 @@
 {% extends 'admin/base.html' %}
+{% block title %}Excluir Categoria{% endblock %}
+{% block page_title %}Excluir Categoria{% endblock %}
+{% block breadcrumb %}Excluir categoria{% endblock %}
 
 {% block content %}
-
-<div class="container">
-    <div>
-        <form method="POST">
-            <button type="submit" class="btn btn-primary  my-2">
-                Confirmar Exclusão</button>
+<div class="row justify-content-center">
+  <div class="col-lg-7">
+    <div class="card card-danger card-outline">
+      <div class="card-body">
+        <h5>Confirma a exclusão de <strong>{{ categoria.nome }}</strong>?</h5>
+        <p class="text-secondary mb-0">Esta operação não poderá ser desfeita.</p>
+      </div>
+      <div class="card-footer d-flex justify-content-between">
+        <a href="{{ url_for('listarCategoria') }}" class="btn btn-secondary">Cancelar</a>
+        <form method="POST" class="m-0">
+          <button type="submit" class="btn btn-danger"><i class="bi bi-trash me-1"></i>Confirmar exclusão</button>
         </form>
-
+      </div>
     </div>
+  </div>
 </div>
-
 {% endblock %}

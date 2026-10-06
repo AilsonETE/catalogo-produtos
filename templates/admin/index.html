@@ -1,13 +1,22 @@
 {% extends 'admin/base.html' %}
-
+{% block title %}Início{% endblock %}
+{% block page_title %}Painel Administrativo{% endblock %}
+{% block breadcrumb %}Início{% endblock %}
 {% block content %}
-
-
-<h1> Pagina inicial</h1>
-
-{% for i in categoria %}
-
-
-{% endfor %}
-
+<div class="row g-3">
+  <div class="col-md-6 col-xl-4">
+    <div class="small-box text-bg-primary">
+      <div class="inner"><h3>Categorias</h3><p>Gerencie as categorias cadastradas</p></div>
+      <i class="small-box-icon bi bi-tags"></i>
+      <a href="{{ url_for('listarCategoria') }}" class="small-box-footer link-light">Acessar <i class="bi bi-arrow-right-circle"></i></a>
+    </div>
+  </div>
+  <div class="col-md-6 col-xl-4">
+    <div class="small-box text-bg-success">
+      <div class="inner"><h3>Produtos</h3><p>Consulte os produtos cadastrados</p></div>
+      <i class="small-box-icon bi bi-box-seam"></i>
+      <a href="{{ url_for('listarProduto') }}" class="small-box-footer link-light">Acessar <i class="bi bi-arrow-right-circle"></i></a>
+    </div>
+  </div>
+</div>
 {% endblock %}

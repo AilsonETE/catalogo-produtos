@@ -1,58 +1,50 @@
 {% extends 'admin/base.html' %}
+{% block title %}Categorias{% endblock %}
+{% block page_title %}Categorias{% endblock %}
+{% block breadcrumb %}Categorias{% endblock %}
 
 {% block content %}
-
-<h1> Lista de categoria</h1>
-
-<div class="col text-end">
-    <a href="{{url_for('cadastrarCategoria')}}" class="btn btn-primary  ">
-        Nova categoria
+<div class="card">
+  <div class="card-header d-flex align-items-center">
+    <h3 class="card-title mb-0">Lista de categorias</h3>
+    <a href="{{ url_for('cadastrarCategoria') }}" class="btn btn-primary btn-sm ms-auto">
+      <i class="bi bi-plus-lg me-1"></i>Nova categoria
     </a>
-</div>
-
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Foto</th>
-            <th scope="col">Ações</th>
-
-
-
-        </tr>
-    </thead>
-    <tbody>
-
+  </div>
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr><th>#</th><th>Imagem</th><th>Nome</th><th>Descrição</th><th>Status</th><th class="text-end">Ações</th></tr>
+        </thead>
+        <tbody>
         {% for i in categorias %}
-        <tr>
-            <th scope="row">{{ i.id }}</th>
-            <td>{{ i.nome }}</td>
-
-            <td><img src="data:image/jpeg;base64,
-            {{ i['imagem'] }}" width="50"></td>
-
-            <td class="text-end">
-                <div class="action-btns justify-content-end">
-                    <a href="{{ url_for('editarCategoria', id=i['id']) }}" class="btn btn-sm btn-warning">
-                        <i class="bi bi-pencil"></i>
-                        <span class="d-none d-lg-inline ms-1">Editar</span>
-                    </a>
-
-                    <a href="{{ url_for('excluirCategoria', id=i['id']) }}" class="btn btn-sm btn-danger">
-                        <i class="bi bi-pencil"></i>
-                        <span class="d-none d-lg-inline ms-1">Excluir</span>
-                    </a>
-                </div>
-
-
+          <tr>
+            <td>{{ i.id }}</td>
+            <td>
+              {% if i.img %}
+                <img src="{{ url_for('static', filename=i.img) }}" class="table-thumb" alt="{{ i.nome }}">
+              {% else %}
+                <span class="placeholder-image"><i class="bi bi-image text-secondary"></i></span>
+              {% endif %}
             </td>
-
-
-
-        </tr>
+            <td class="fw-semibold">{{ i.nome }}</td>
+            <td>{{ i.descricao or '-' }}</td>
+            <td>
+              {% if i.ativo|string == 'True' %}<span class="badge text-bg-success">Ativo</span>
+              {% else %}<span class="badge text-bg-secondary">Inativo</span>{% endif %}
+            </td>
+            <td class="text-end text-nowrap">
+              <a href="{{ url_for('editarCategoria', id=i.id) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+              <a href="{{ url_for('excluirCategoria', id=i.id) }}" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="6" class="text-center text-secondary py-4">Nenhuma categoria cadastrada.</td></tr>
         {% endfor %}
-    </tbody>
-</table>
-
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {% endblock %}
